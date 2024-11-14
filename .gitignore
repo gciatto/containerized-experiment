@@ -1,0 +1,8 @@
+.venv/
+.ipynb_checkpoints/
+*.pyc
+*.pkl
+*.csv
+*.png
+*.log
+data/
