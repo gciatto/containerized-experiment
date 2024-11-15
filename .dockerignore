@@ -1,0 +1,12 @@
+.gitignore
+.git
+.gitmodules
+.gitattributes
+.venv/
+.ipynb_checkpoints/
+*.pyc
+*.pkl
+*.csv
+*.png
+*.log
+data/

@@ -1,0 +1,16 @@
+services:
+  experiment:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_VERSION: 3.12
+    volumes:
+      - ./data:/data
+    environment:
+      # DATASET_ID: 61 # openml dataset id
+      # TEST_SIZE: 0.2
+      # RANDOM_STATE: 42
+      # K_FOLDS: 5
+      # SCORING: accuracy
+      # PICTURE_SIZE: 10, 6
