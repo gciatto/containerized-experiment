@@ -1,25 +1,26 @@
 services:
-  experiment:
-    build:
+  experiment-dt:
+    build: &experiment_build
       context: .
       dockerfile: Dockerfile
       args:
         PYTHON_VERSION: 3.12
-    volumes:
+    volumes: &volumes
       - ./data:/data
+    hostname: dt
     environment:
-      # DATASET_ID: 61 # openml dataset id
-      # TEST_SIZE: 0.2
-      # RANDOM_STATE: 42
-      # K_FOLDS: 5
-      # SCORING: accuracy
-      # PICTURE_SIZE: 10, 6
-      DATA_OWNER: 1000:1000
-      #
+      DATA_OWNER: &owner 1000:1000
       MODEL_DecisionTree: |
           sklearn.tree.DecisionTreeClassifier: 
               max_depth: [null, 10, 20]
               min_samples_split: [2, 10, 20]
+
+  experiment-mlp:
+    build: *experiment_build
+    volumes: *volumes
+    hostname: mlp
+    environment:
+      DATA_OWNER: *owner
       MODEL_MLP: |
           sklearn.neural_network.MLPClassifier: 
               hidden_layer_sizes: 
@@ -28,10 +29,24 @@ services:
                 - [50, 50]
               activation: ['tanh', 'relu']
               solver: ['adam', 'sgd']
+
+  experiment-lr:
+    build: *experiment_build
+    volumes: *volumes
+    hostname: lr
+    environment:
+      DATA_OWNER: *owner
       MODEL_LogisticRegression: |
           sklearn.linear_model.LogisticRegression: 
               C: [0.1, 1, 10]
               solver: ['liblinear', 'lbfgs']
+
+  experiment-svm:
+    build: *experiment_build
+    volumes: *volumes
+    hostname: svm
+    environment:
+      DATA_OWNER: *owner
       MODEL_SVM: |
           sklearn.svm.SVC: 
               C: [0.1, 1, 10]
