@@ -14,3 +14,4 @@ services:
       # K_FOLDS: 5
       # SCORING: accuracy
       # PICTURE_SIZE: 10, 6
+      DATA_OWNER: 1000:1000
