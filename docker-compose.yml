@@ -15,3 +15,24 @@ services:
       # SCORING: accuracy
       # PICTURE_SIZE: 10, 6
       DATA_OWNER: 1000:1000
+      #
+      MODEL_DecisionTree: |
+          sklearn.tree.DecisionTreeClassifier: 
+              max_depth: [null, 10, 20]
+              min_samples_split: [2, 10, 20]
+      MODEL_MLP: |
+          sklearn.neural_network.MLPClassifier: 
+              hidden_layer_sizes: 
+                - [50]
+                - [100,]
+                - [50, 50]
+              activation: ['tanh', 'relu']
+              solver: ['adam', 'sgd']
+      MODEL_LogisticRegression: |
+          sklearn.linear_model.LogisticRegression: 
+              C: [0.1, 1, 10]
+              solver: ['liblinear', 'lbfgs']
+      MODEL_SVM: |
+          sklearn.svm.SVC: 
+              C: [0.1, 1, 10]
+              kernel: ['linear', 'rbf']
